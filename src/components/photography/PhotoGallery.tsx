@@ -21,6 +21,8 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({ albumName, photos: initialP
   const [loading, setLoading] = useState(false);
   const PHOTOS_PER_PAGE = 20;
 
+  console.log('trigger that build');
+
   // Load more photos when scrolling near bottom
   useEffect(() => {
     const handleScroll = () => {

@@ -8,7 +8,7 @@ const HomePage: React.FC = () => {
             {/* Hero section with your best photo */}
             <Box sx={{
                 height: 'calc(100vh - 64px)',
-                backgroundImage: 'url(https://res.cloudinary.com/aiphoto/image/upload/c_scale,w_1920,q_auto/your-best-photo)',
+                // backgroundImage: 'url(https://res.cloudinary.com/aiphoto/image/upload/c_scale,w_1920,q_auto/)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 display: 'flex',
