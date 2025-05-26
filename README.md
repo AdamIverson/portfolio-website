@@ -1,7 +1,6 @@
 # Portfolio Website
 
-This is a portfolio website built using React, TypeScript, and Material-UI. The website showcases various areas of work, including photography, theater projects, and development projects.
-
+This is a portfolio website built using React, TypeScript, and Material-UI.
 ## Technologies Used
 
 - React
