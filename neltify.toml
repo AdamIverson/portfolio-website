@@ -7,15 +7,14 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# SPA redirect - MUST be last redirect
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
 
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
+# Catch-all redirect for SPA (MUST be last)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
