@@ -111,30 +111,21 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({ albumName, photos: initialP
   // In your PhotoGallery.tsx file
   const fetchPhotosFromCloudinary = async (albumPath: string) => {
     try {
-      const response = await fetch(`/api/photos?album=${albumPath}`);
+      console.log('Fetching photos for album:', albumPath);
+
+      // Change this line to use Netlify Functions
+      const response = await fetch(`/.netlify/functions/photos?album=${albumPath}`);
 
       if (!response.ok) {
-        throw new Error(`Server error ${response.status}`);
+        const errorText = await response.text();
+        console.error('Server response:', errorText);
+        throw new Error(`Server error ${response.status}: ${errorText}`);
       }
 
       const data = await response.json();
-      console.log("API response:", data);
-
-      if (data.resources && data.resources.length > 0) {
-        // Map Cloudinary resources to your Photo type
-        const cloudinaryPhotos = data.resources.map((resource: any) => ({
-          id: resource.public_id,
-          title: resource.public_id.split('/').pop() || 'Photo',
-          url: resource.secure_url,
-          tags: resource.tags || []
-        }));
-
-        setPhotos(cloudinaryPhotos);
-      } else {
-        setPhotos([]);
-      }
+      // ... rest of your code
     } catch (error) {
-      console.error('Error fetching photos from Cloudinary:', error);
+      console.error('Error fetching photos:', error);
       setPhotos([]);
     }
   };
