@@ -2,17 +2,17 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Box, Breadcrumbs, Button, Container, IconButton, Link, Tab, Tabs, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PhotoGallery from '../components/photography/PhotoGallery';
 
-interface GalleryParams {
+interface GalleryParams extends Record<string, string | undefined> {
   album?: string;
   subalbum?: string;
 }
 
 const GalleryPage: React.FC = () => {
   const { album, subalbum } = useParams<GalleryParams>();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [currentAlbum, setCurrentAlbum] = useState<string>(album || 'travel');
   const [currentSubalbum, setCurrentSubalbum] = useState<string | null>(subalbum || null);
 
@@ -42,12 +42,12 @@ const GalleryPage: React.FC = () => {
   const handleAlbumChange = (event: React.SyntheticEvent, newValue: string) => {
     setCurrentAlbum(newValue);
     setCurrentSubalbum(null);
-    history.push(`/gallery/${newValue}`);
+    navigate(`/gallery/${newValue}`);
   };
 
   const handleSubalbumSelect = (subalbum: string) => {
     setCurrentSubalbum(subalbum);
-    history.push(`/gallery/${currentAlbum}/${subalbum}`);
+    navigate(`/gallery/${currentAlbum}/${subalbum}`);
   };
 
   const getFolderPath = () => {
@@ -111,7 +111,7 @@ const GalleryPage: React.FC = () => {
               <IconButton
                 onClick={() => {
                   setCurrentSubalbum(null);
-                  history.push(`/gallery/${currentAlbum}`);
+                  navigate(`/gallery/${currentAlbum}`);
                 }}
                 aria-label="back"
                 sx={{
@@ -128,7 +128,7 @@ const GalleryPage: React.FC = () => {
             <Breadcrumbs>
               <Link
                 color="inherit"
-                onClick={() => history.push('/gallery')}
+                onClick={() => navigate('/gallery')}
                 sx={{ cursor: 'pointer' }}
               >
                 Gallery
@@ -139,7 +139,7 @@ const GalleryPage: React.FC = () => {
                   color="inherit"
                   onClick={() => {
                     setCurrentSubalbum(null);
-                    history.push(`/gallery/${currentAlbum}`);
+                    navigate(`/gallery/${currentAlbum}`);
                   }}
                   sx={{
                     cursor: 'pointer',
